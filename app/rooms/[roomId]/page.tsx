@@ -5,11 +5,25 @@ import "./rooms.css";
 import { socket } from "../../../utils/socket";
 import { useEffect, useState } from "react";
 
+type Questions = {
+  type: "normal" | "charades";
+  category?:
+    | "discovery"
+    | "innovation"
+    | "impact"
+    | "inclusion"
+    | "teamwork"
+    | "fun"
+    | "wellness";
+  question: string;
+};
+
 export default function Page({ params }: { params: { roomId: string } }) {
   const [id, setId] = useState(socket.id);
   const [turn, setTurn] = useState<{ member: string; index: number } | null>(
     null
   );
+  const [question, setQuestion] = useState<Questions | null>();
 
   useEffect(() => {
     function onConnect() {
@@ -20,9 +34,13 @@ export default function Page({ params }: { params: { roomId: string } }) {
 
     function onDisconnect() {}
 
-    function onSwitch(message: { member: string; index: number }) {
+    function onSwitch(message: {
+      turn: { member: string; index: number };
+      question: Questions;
+    }) {
       console.log(message, "ok");
-      setTurn(message);
+      setTurn(message.turn);
+      setQuestion(message.question);
     }
 
     socket.on("connect", onConnect);
@@ -31,6 +49,7 @@ export default function Page({ params }: { params: { roomId: string } }) {
     socket.on("admin", (message) => {
       console.log(message);
       setTurn(message.turn);
+      setQuestion(message.question);
     });
     socket.on("switch", onSwitch);
 
@@ -52,6 +71,7 @@ export default function Page({ params }: { params: { roomId: string } }) {
       {/* ! Global CSS  - from rooms.css*/}
       <h1>{turn?.member}</h1>
       <h1 className="cool">Room: {params.roomId}</h1>
+      <h1>{question?.question}</h1>
       {/* Or you can always use tailwind!!!! */}
       <p className="text-5xl">WWWW</p>
       <div>
