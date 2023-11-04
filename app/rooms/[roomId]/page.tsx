@@ -20,6 +20,11 @@ export default function Page({ params }: { params: { roomId: string } }) {
 
     function onDisconnect() {}
 
+    function onSwitch(message: { member: string; index: number }) {
+      console.log(message, "ok");
+      setTurn(message);
+    }
+
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("join", (socket) => console.log(socket));
@@ -27,6 +32,7 @@ export default function Page({ params }: { params: { roomId: string } }) {
       console.log(message);
       setTurn(message.turn);
     });
+    socket.on("switch", onSwitch);
 
     return () => {
       socket.off("connect", onConnect);
@@ -35,6 +41,7 @@ export default function Page({ params }: { params: { roomId: string } }) {
       socket.off("admin", (message) => {
         setTurn(message.turn);
       });
+      socket.off("switch", onSwitch);
     };
   }, [params.roomId]);
 
@@ -47,6 +54,48 @@ export default function Page({ params }: { params: { roomId: string } }) {
       <h1 className="cool">Room: {params.roomId}</h1>
       {/* Or you can always use tailwind!!!! */}
       <p className="text-5xl">WWWW</p>
+      <div>
+        <Buttons
+          turn={turn?.member}
+          id={socket.id}
+          changeTurn={() => {
+            console.log("switch");
+            socket.emit("turn", params.roomId);
+          }}
+        />
+      </div>
     </div>
   );
 }
+
+const Buttons = ({
+  turn,
+  id,
+  changeTurn,
+}: {
+  turn: string | undefined | null;
+  id: string | undefined | null;
+  changeTurn: () => void;
+}) => {
+  console.log(turn, id);
+  if (!turn || !id) return null;
+  if (turn === id) {
+    return (
+      <>
+        <button
+          className="border-blue-300 p-3 m-4 border-2"
+          onClick={changeTurn}
+        >
+          Skip
+        </button>
+        <button
+          className="border-blue-300 p-3 border-2 m-4"
+          onClick={changeTurn}
+        >
+          Next
+        </button>
+      </>
+    );
+  }
+  return null;
+};
