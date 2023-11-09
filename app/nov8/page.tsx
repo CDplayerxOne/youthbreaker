@@ -9,7 +9,7 @@ export default function Birthday() {
           From: <input type="text" className="bg-black" />
         </pre>
         <br />
-        Date: <input className="bg-black text-teal-300" />
+        Date: <input className="bg-black text-teal-400" />
       </h1>
       <h1 className="text-white text-3xl">
         Also Happy Birthday to <input type="text" className="bg-black" />
