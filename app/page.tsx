@@ -24,7 +24,7 @@ export default function Home() {
   const [turn, setTurn] = useState<Turn | null>(null);
 
   useEffect(() => {
-    socket.on("connection", () => {
+    socket.on("connect", () => {
       socket.emit("in");
     });
     socket.on("list", (members) => {
@@ -35,7 +35,7 @@ export default function Home() {
     });
 
     return () => {
-      socket.off("connection", () => {
+      socket.off("connect", () => {
         socket.emit("in");
       });
       socket.off("list", (members) => setList(members));
