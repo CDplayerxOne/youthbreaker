@@ -60,7 +60,9 @@ export default function Content({ params }: { params: { roomId: string } }) {
 
   return (
     <>
-      <p className="text-white absolute top-1 text-lg">Room {params.roomId}</p>
+      <p className="text-white absolute top-1 text-lg">
+        Room {params.roomId} {socket.id}
+      </p>
       <div className="min-h-screen min-w-screen h-screen w-full bg-black flex justify-center items-center font-sans">
         <div className="w-5/6 h-3/4 sm:w-3/4 min-w-96 relative max-w-screen">
           <div className="bg-white max-w-screen h-full w-full min-w-96 rounded-3xl absolute z-20 flex flex-col justify-center">
