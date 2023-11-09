@@ -53,6 +53,7 @@ export default function Home() {
   return (
     <>
       <title>Youthbreaker</title>
+      <p className="text-white absolute top-1 text-lg">{socket.id}</p>
       <div className="min-h-screen min-w-screen bg-black items-center overflow-y-scroll">
         <div className="p-4 w-full bg-black fixed z-10">
           <h1 className="text-center text-xl md:text-3xl lg:text-5xl font-bold text-white">
