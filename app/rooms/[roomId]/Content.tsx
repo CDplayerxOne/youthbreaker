@@ -79,8 +79,20 @@ export default function Content({ params }: { params: { roomId: string } }) {
               </h1>
             </div>
           </div>
-          <div className="bg-red-500 max-w-screen  right-4 bottom-4 sm:right-6 sm:bottom-6 h-full w-full min-w-96 rounded-3xl absolute z-0"></div>
-          <div className="bg-blue-600 max-w-screen left-4 top-4 sm:left-6 sm:top-6 h-full w-full min-w-96 rounded-3xl absolute z-10"></div>
+          <div
+            className={`${
+              turn && turn?.member === socket.id
+                ? "bg-purple-500"
+                : "bg-red-500"
+            } max-w-screen  right-4 bottom-4 sm:right-6 sm:bottom-6 h-full w-full min-w-96 rounded-3xl absolute z-0`}
+          ></div>
+          <div
+            className={`${
+              turn && turn?.member === socket.id
+                ? "bg-purple-700"
+                : "bg-blue-600"
+            } max-w-screen left-4 top-4 sm:left-6 sm:top-6 h-full w-full min-w-96 rounded-3xl absolute z-10`}
+          ></div>
         </div>
         <Buttons
           turn={turn?.member}
