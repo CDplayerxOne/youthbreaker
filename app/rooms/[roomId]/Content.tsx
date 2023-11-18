@@ -114,7 +114,9 @@ export default function Content({ params }: { params: { roomId: string } }) {
               answered the question, press NEXT to allow the next player to
               answer.
             </p>
-            <button onClick={() => setOpen(false)}>Close</button>
+            <button className="text-3xl" onClick={() => setOpen(false)}>
+              Close
+            </button>
           </div>
         )}
       </div>
