@@ -23,6 +23,7 @@ export default function Content({ params }: { params: { roomId: string } }) {
     null
   );
   const [question, setQuestion] = useState<Questions | null>();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     function onConnect() {
@@ -100,7 +101,22 @@ export default function Content({ params }: { params: { roomId: string } }) {
           changeTurn={() => {
             socket.emit("turn", params.roomId);
           }}
+          openIns={() => {
+            setOpen(true);
+          }}
         />
+        {open && (
+          <div className="absolute top-1/2 left-1/2 bg-purple-900 h-2/3 w-2/3 text-white font-bold flex flex-col p-8 -translate-y-1/2 -translate-x-1/2 z-50">
+            <h1 className="text-5xl text-center mb-14">Instructions</h1>
+            <p className="text-3xl text-center mb-14 mx-14">
+              when it is your turn, the red and blue panels will turn purple.
+              During your turn, you should answer the prompt. After you have
+              answered the question, press NEXT to allow the next player to
+              answer.
+            </p>
+            <button onClick={() => setOpen(false)}>Close</button>
+          </div>
+        )}
       </div>
     </>
   );
@@ -110,10 +126,12 @@ const Buttons = ({
   turn,
   id,
   changeTurn,
+  openIns,
 }: {
   turn: string | undefined | null;
   id: string | undefined | null;
   changeTurn: () => void;
+  openIns: () => void;
 }) => {
   if (!turn || !id) return null;
   if (turn === id) {
@@ -122,9 +140,9 @@ const Buttons = ({
         <div className="w-5/6 sm:w-3/4 flex px-16">
           <button
             className="text-white bg-blue-600 px-4 py-2 text-xl rounded-lg"
-            onClick={changeTurn}
+            onClick={openIns}
           >
-            Skip
+            Instructions
           </button>
           <div className="flex-grow" />
           <button
