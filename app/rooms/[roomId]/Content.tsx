@@ -108,14 +108,14 @@ export default function Content({ params }: { params: { roomId: string } }) {
         {open && (
           <div className="absolute top-1/2 left-1/2 bg-purple-900 h-2/3 w-2/3 text-white font-bold flex flex-col p-8 -translate-y-1/2 -translate-x-1/2 z-50">
             <h1 className="text-5xl text-center mb-14">Instructions</h1>
-            <p className="text-3xl text-center mb-14 mx-14 text-purple-900">
+            <p className="text-3xl text-center mb-14 mx-14">
               When it is your turn, the red and blue panels will turn purple.
               During your turn, you should answer the prompt. After you have
               answered the question, press NEXT to allow the next player to
               answer.
             </p>
             <button
-              className="text-3xl border-solid border-1 border-white"
+              className="text-3xl border-solid border-1 border-white text-purple-900"
               onClick={() => setOpen(false)}
             >
               Close
