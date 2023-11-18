@@ -109,7 +109,7 @@ export default function Content({ params }: { params: { roomId: string } }) {
           <div className="absolute top-1/2 left-1/2 bg-purple-900 h-2/3 w-2/3 text-white font-bold flex flex-col p-8 -translate-y-1/2 -translate-x-1/2 z-50">
             <h1 className="text-5xl text-center mb-14">Instructions</h1>
             <p className="text-3xl text-center mb-14 mx-14">
-              when it is your turn, the red and blue panels will turn purple.
+              When it is your turn, the red and blue panels will turn purple.
               During your turn, you should answer the prompt. After you have
               answered the question, press NEXT to allow the next player to
               answer.
