@@ -102,7 +102,7 @@ export default function Content({ params }: { params: { roomId: string } }) {
             socket.emit("turn", params.roomId);
           }}
           openIns={() => {
-            setOpen(true);
+            setOpen(!open);
           }}
         />
         {open && (
