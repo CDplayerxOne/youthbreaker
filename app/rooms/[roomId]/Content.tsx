@@ -115,7 +115,7 @@ export default function Content({ params }: { params: { roomId: string } }) {
               answer.
             </p>
             <button
-              className="text-3xl border-solid border-1 border-white text-purple-900"
+              className="text-3xl border-solid border-1 border-white text-white"
               onClick={() => setOpen(false)}
             >
               Close
