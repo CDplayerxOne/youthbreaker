@@ -20,7 +20,6 @@ type Turn = {
 
 export default function Home() {
   const [list, setList] = useState<List | null>(null);
-  const [open, setOpen] = useState(false);
   const [turn, setTurn] = useState<Turn | null>(null);
 
   useEffect(() => {
@@ -43,11 +42,6 @@ export default function Home() {
         setTurn(who);
       });
     };
-  }, []);
-
-  useEffect(() => {
-    const item = localStorage.getItem("leah");
-    if (!item || item !== "false") setOpen(true);
   }, []);
 
   return (
@@ -101,25 +95,6 @@ export default function Home() {
             })}
         </div>
       </div>
-      {open && (
-        <div className="absolute top-1/2 left-1/2 bg-purple-400 text-white font-bold flex flex-col p-8 -translate-y-1/2 -translate-x-1/2 border-4 border-red-500">
-          <h1>If your name is Leah Huang, Click the Button Below 👇</h1>
-          <p className="text-9xl text-center">🐀😍</p>
-          <a
-            href="https://www.youtube.com/watch?v=-szT7pIz2N4"
-            target="_blank"
-            className="my-8 border-4 p-4 bg-red-600 text-center"
-          >
-            <button> Click here Leah! </button>
-          </a>
-          <button onClick={() => setOpen(false)}>
-            {" "}
-            <a
-              href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-              target="_blank"
-            >
-              Close
-            </a>{" "}
           </button>
         </div>
       )}
